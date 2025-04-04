@@ -1,26 +1,30 @@
-{
+  {
     "manifest_version": 3,
-    "name": "My Arc Extension",
+    "name": "Auto ClassName Replacer",
     "version": "1.0",
-    "description": "Arc 브라우저용 확장 프로그램",
-    "permissions": ["storage", "tabs", "activeTab", "scripting"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
-    },
+    "description": "CodeMirror 기반 에디터에서 'public class 클래스명'을 자동으로 'Main'으로 바꿉니다.",
+    "permissions": [
+      "scripting", "activeTab", "webNavigation"
+    ],
+    "host_permissions": [
+      "https://www.acmicpc.net/*"
+    ],
     "content_scripts": [
       {
         "matches": ["https://www.acmicpc.net/submit/*"],
         "js": ["content.js"],
-        "run_at": "document_idle"
+        "run_at": "document_end"
       }
-    ]
+    ],
+    "icons": {
+      "16": "icons/icon16.png",
+      "128": "icons/icon128.png"
+    },
+    "action": {
+      "default_title": "클래스명 자동 변경기"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
   }
   
